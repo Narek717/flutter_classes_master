@@ -7,9 +7,13 @@ class SettingsPage extends StatefulWidget {
   @override
   State<SettingsPage> createState() => _SettingsPageState();
 }
-
 class _SettingsPageState extends State<SettingsPage> {
   late Text text;
+  bool isSwitched = false;
+  @override
+  void setState(VoidCallback fn) {
+    super.setState(fn);
+  }
   @override
   Widget build(BuildContext context) {
     return _buildBody(context);
@@ -24,9 +28,24 @@ class _SettingsPageState extends State<SettingsPage> {
           final settings = snapshot.data as List<SettingsModel>;
 
           return ListView.separated(
-            itemBuilder: (context, index) {
-               text = Text(settings[index].settingName ?? 'no items');
-              return text;
+            itemBuilder: (context, index){
+              isSwitched = settings[index].settingValue as bool;
+              return
+              Row(
+                children: [
+              text = Text(settings[index].settingName ?? 'no items'),
+
+              Switch(
+              value: isSwitched,
+              onChanged: (value) {
+            _onSwitch(
+            );
+              },
+              ),
+              ],
+              );
+
+              // return text;
             },
             separatorBuilder: (context, index) => const Divider(),
             itemCount: settings.length,
@@ -38,5 +57,11 @@ class _SettingsPageState extends State<SettingsPage> {
         }
       },
     );
+  }
+
+  void _onSwitch() {
+    setState(() {
+      isSwitched = !isSwitched;
+    });
   }
 }

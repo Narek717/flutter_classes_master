@@ -4,6 +4,8 @@ import 'package:indigo/api/indigo_api.dart';
 import 'package:indigo/models/product_model.dart';
 import 'package:indigo/pages/homepage/settings_page.dart';
 
+import '../../models/setting_model.dart';
+
 class HomePageWidget extends StatefulWidget {
   const HomePageWidget({Key? key}) : super(key: key);
 
@@ -16,7 +18,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   void initState() {
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,26 +27,49 @@ class _HomePageWidgetState extends State<HomePageWidget> {
         title: const Text(
           'Home',
         ),
-       actions: [
-          PopupMenuButton(
-           itemBuilder: (context) {
-             return [
-               PopupMenuItem(
-                 value: 'Edit',
-                 child: Text('Edit'),
-               ),
-               PopupMenuItem(
-                 value: 'delete',
-                 child: Text('Delete'),
-               )
-             ];
-           },
-           onSelected: (String value){
-             print('You Click on po up menu item');
-           },
-         ),
-       ],
-    ),
+
+// popup menu button
+        actions: [
+          PopupMenuButton<int>(
+            itemBuilder: (context) => [
+              // popupmenu item 1
+              PopupMenuItem(
+                value: 1,
+                // row has two child icon and text.
+                child: Row(
+                  children: [
+                    Icon(Icons.star),
+                    SizedBox(
+                      // sized box with width 10
+                      width: 10,
+                    ),
+                    Text("Get The App")
+                  ],
+                ),
+              ),
+              // popupmenu item 2
+              PopupMenuItem(
+                value: 2,
+                // row has two child icon and text
+                child: Row(
+                  children: [
+                    Icon(Icons.chrome_reader_mode),
+                    SizedBox(
+                      // sized box with width 10
+                      width: 10,
+                    ),
+                    Text("About")
+                  ],
+                ),
+              ),
+            ],
+            offset: Offset(0, 40),
+            color: Colors.grey,
+            elevation: 2,
+          ),
+        ],
+
+      ),
     );
   }
   Widget _buildBody(BuildContext context) {
