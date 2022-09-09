@@ -31,7 +31,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
            itemBuilder: (context) {
              return [
                PopupMenuItem(
-                 value: 'edit',
+                 value: 'Edit',
                  child: Text('Edit'),
                ),
                PopupMenuItem(
